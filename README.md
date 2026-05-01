@@ -6,12 +6,15 @@ Drag resources and data sources from a categorized palette onto a canvas, fill i
 and inline configuration blocks (NICs, disks, sysprep / cloud-init, boot config, ip configs, …),
 and export valid Terraform.
 
+**Live demo:** <https://ahkarhul.github.io/ntnx-cartographer/>
+
 ## Run it
 
-`index.html` is the whole app. Open it in any modern browser:
+`index.html` is the whole app. Open it in any modern browser, or load the
+[live demo](https://ahkarhul.github.io/ntnx-cartographer/).
 
 ```sh
-# any of these work
+# any of these work locally
 open index.html
 xdg-open index.html
 start index.html

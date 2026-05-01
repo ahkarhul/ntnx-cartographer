@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  html-validate:
+    name: html-validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install html5validator
+        run: pip install --no-cache-dir html5validator
+
+      # vnu (the validator backing html5validator) ships an outdated CSS engine
+      # that false-positives on modern selectors and properties (`:has`, `inset`,
+      # `scrollbar-*`, etc.). vnu also raises those false positives when parsing
+      # inline <style> blocks during HTML validation, so we filter "CSS:" output.
+      - name: Validate HTML
+        run: html5validator --root . --ignore "CSS:" --log INFO
